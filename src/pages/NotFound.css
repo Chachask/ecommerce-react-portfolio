@@ -1,0 +1,18 @@
+.bold-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: bolder;
+    color: rgb(8, 79, 45);;
+    margin-top: 100px;
+    
+
+}
+h1{
+    font-size: 40px;
+}
+p{
+    font-size: 60px;
+}
