@@ -22,7 +22,6 @@ export function HomePage({cart}) {
                 <div className="products-grid">
                     {products.map((product) => {
                         return (
-                            <>
                                 <div key={product.id} className="product-container">
                                     <div className="product-image-container">
                                         <img className="product-image"
@@ -72,7 +71,6 @@ export function HomePage({cart}) {
                                     </button>
                                 </div>
 
-                            </>
                         )
                     })}
                 </div>
