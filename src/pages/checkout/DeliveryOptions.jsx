@@ -1,6 +1,7 @@
 import { formatMoney } from "../../utils/money"
+import { Fragment } from "react"
 import dayjs from "dayjs"
-export function DeliveryOptions({ cartItem, deliveryOptions}) {
+export function DeliveryOptions({ cartItem, deliveryOptions }) {
     return (
         <div className="delivery-options">
             <div className="delivery-options-title">
@@ -12,8 +13,8 @@ export function DeliveryOptions({ cartItem, deliveryOptions}) {
                     priceString = `${formatMoney(deliveryOption.priceCents)} - shipping`
                 }
                 return (
-                    <>
-                        <div key={deliveryOption.id} className="delivery-option">
+                        <Fragment key={deliveryOption.id}>
+                        <div  className="delivery-option">
                             <input type="radio"
                                 checked={deliveryOption.id === cartItem.deliveryOptionId}
                                 className="delivery-option-input"
@@ -55,11 +56,11 @@ export function DeliveryOptions({ cartItem, deliveryOptions}) {
                             </div>
                         </div>
 
-                    </>
-                )
-            })}
+                    </Fragment>
+    )
+})}
 
 
-        </div>
+        </div >
     )
 }
