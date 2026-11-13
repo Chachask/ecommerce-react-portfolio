@@ -1,11 +1,11 @@
 import { Header } from '../Components/Header'
 import './NotFound.css'
 
-export function NotFound(){
+export function NotFound({cart}){
     return (
         <>
 
-        <Header />
+        <Header cart={cart}/>
 
 
         <div className="bold-text">
