@@ -10,22 +10,30 @@ import { useEffect, useState } from 'react'
 
 function App() {
   const [cart, setCart] = useState([]);
-  useEffect(()=>{
-    const getProductsData = async() =>{
-      const response = await axios.get("/api/cart-items?expand=product")
-      setCart(response.data)
-    }
-     getProductsData();
-          
 
+  const loadCart = async() =>{
+    try {
+      const response = await axios.get("/api/cart-items?expand=product")
+      console.log("Updated cart from API:", response.data);
+      setCart(response.data)
+
+    }catch(error){
+      console.error("Failed to load cart", error)
+    }
+      
+    };
+  useEffect(()=>{
+    
+    loadCart();
+    
   }, [])
   
 
   return (
     <>
     <Routes>
-      <Route index element={<HomePage cart={cart} />} />
-      <Route path='checkout' element={<CheckoutPage cart={cart}/>} />
+      <Route index element={<HomePage cart={cart} loadCart={loadCart}/>} />
+      <Route path='checkout' element={<CheckoutPage cart={cart} loadCart={loadCart}/>} />
       <Route path='orders' element={<OrdersPages cart={cart}/>} />
       <Route path="tracking/:orderId/:productId" element={<Tracking cart={cart}/>} />
       <Route path="404" element={<NotFound cart={cart}/>} />

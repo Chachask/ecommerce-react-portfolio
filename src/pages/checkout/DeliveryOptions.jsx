@@ -1,7 +1,8 @@
+import axios from 'axios'
 import { formatMoney } from "../../utils/money"
-import { Fragment } from "react"
-import dayjs from "dayjs"
-export function DeliveryOptions({ cartItem, deliveryOptions }) {
+
+import { DeliveryDate } from "./DeliveryDate"
+export function DeliveryOptions({ cartItem, deliveryOptions, loadCart }) {
     return (
         <div className="delivery-options">
             <div className="delivery-options-title">
@@ -12,51 +13,34 @@ export function DeliveryOptions({ cartItem, deliveryOptions }) {
                 if (deliveryOption.priceCents > 0) {
                     priceString = `${formatMoney(deliveryOption.priceCents)} - shipping`
                 }
+                const updateDeliveryOption = async () => {
+                    console.log("Selected option:", deliveryOption.id);
+                    await axios.put(`/api/cart-items/${cartItem.productId}`, {
+                        deliveryOptionId: deliveryOption.id
+                    });
+                    
+                    await loadCart();
+                    
+
+                }
                 return (
-                        <Fragment key={deliveryOption.id}>
-                        <div  className="delivery-option">
+                        
+                        <div key={deliveryOption.id} className="delivery-option" onClick={updateDeliveryOption}>
                             <input type="radio"
                                 checked={deliveryOption.id === cartItem.deliveryOptionId}
+                                onChange={() => {}}
                                 className="delivery-option-input"
                                 name={`delivery-option-${cartItem.productId}`} />
                             <div>
-                                <div className="delivery-option-date">
-                                    {dayjs(deliveryOption.estimatedDeliveryTimeMs).format('dddd, MMMM D')}
-
-                                </div>
+                               <DeliveryDate  cartItem={cartItem} deliveryOptions={deliveryOptions} deliveryOption={deliveryOption}/>
                                 <div className="delivery-option-price">
                                     {priceString}
                                 </div>
                             </div>
                         </div>
-                        <div className="delivery-option">
-                            <input type="radio"
-                                className="delivery-option-input"
-                                name="delivery-option-1" />
-                            <div>
-                                <div className="delivery-option-date">
-                                    Wednesday, June 15
-                                </div>
-                                <div className="delivery-option-price">
-                                    $4.99 - Shipping
-                                </div>
-                            </div>
-                        </div>
-                        <div className="delivery-option">
-                            <input type="radio"
-                                className="delivery-option-input"
-                                name="delivery-option-1" />
-                            <div>
-                                <div className="delivery-option-date">
-                                    Monday, June 13
-                                </div>
-                                <div className="delivery-option-price">
-                                    $9.99 - Shipping
-                                </div>
-                            </div>
-                        </div>
+      
 
-                    </Fragment>
+                    
     )
 })}
 
