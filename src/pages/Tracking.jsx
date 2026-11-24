@@ -57,9 +57,9 @@ export function Tracking({cart}) {
 
           <div className="delivery-date">
             {deliveryProgress >= 100 ? (
-              <p>Arrived on {dayjs(orderProduct.product.estimatedDeliveryTimeMs).format('MMMM D')} </p>
+              <p>Arrived on {dayjs(orderProduct.estimatedDeliveryTimeMs).format('MMMM D')} </p>
             ) : (
-              <p>delivered on {dayjs(orderProduct.product.estimatedDeliveryTimeMs).format('MMMM D')}</p>
+              <p> Delivery will be on {dayjs(orderProduct.estimatedDeliveryTimeMs).format('MMMM D')}</p>
             )}
           </div>
 

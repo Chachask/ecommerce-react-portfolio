@@ -114,6 +114,13 @@
   font-weight: 700;
   margin-bottom: 5px;
 }
+.checkout-page .product-quantity{
+  justify-content: space-between;
+}
+.checkout-page .product-quantity .quantity-input{
+  width: 35px;
+  height: 20px;
+}
 
 .checkout-page .product-quantity .link-primary {
   margin-left: 3px;

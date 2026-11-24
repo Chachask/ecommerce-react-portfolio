@@ -9,20 +9,23 @@ export function Product({ product, loadCart }) {
 
         const timer = setTimeout(() => {
             setShowClick(false);
-        }, 2000);
+        }, 1000);
 
         // Cleanup function clears the timer if clicked again or component unmounts
         return () => clearTimeout(timer);
     }, [showClick]);
     const addToCart =
         async () => {
+            try {
             await axios.post('/api/cart-items', {
                 productId: product.id,
                 quantity
             })
             await loadCart();
             setShowClick(true);
-
+        } catch(error){
+            console.error('error adding to cart:', error)
+        }
 
         }
     const selectQuantity = (event) => {
